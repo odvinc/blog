@@ -9,7 +9,7 @@ rm -rf public
 #hugo
 
 # Redirect to http://odvinc.ru
-mkdir /public
+mkdir public
 cat > public/index.html <<EOF
 <!DOCTYPE html>
 <html>
