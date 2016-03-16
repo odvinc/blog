@@ -3,7 +3,7 @@
 echo -e "\033[0;32mDeploying updates to GitHub...\033[0m"
 
 # Remove the public folder to make room for the gh-pages subtree
-rm -rf public
+rm -rf public/*
 
 # Build the project.
 #hugo
