@@ -10,7 +10,7 @@ rm -rf public/*
 
 # Redirect to http://odvinc.ru
 mkdir public
-echo blog.odvinc.ru > CNAME 
+echo blog.odvinc.ru > public/CNAME 
 cat > public/index.html <<EOF
 <!DOCTYPE html>
 <html>
