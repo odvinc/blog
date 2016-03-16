@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Development on odvinc Blog</title>
+    <link>http://blog.odvinc.ru/tags/development/</link>
+    <description>Recent content in Development on odvinc Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>&amp;copy; 2016. All rights reserved.</copyright>
+    <lastBuildDate>Fri, 04 Apr 2014 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://blog.odvinc.ru/tags/development/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Умный дом своими руками</title>
+      <link>http://blog.odvinc.ru/post/smart-house/</link>
+      <pubDate>Fri, 04 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.odvinc.ru/post/smart-house/</guid>
+      <description>&lt;p&gt;Эта статья о том как можно создать &lt;a href=&#34;http://ru.wikipedia.org/wiki/%D0%A3%D0%BC%D0%BD%D1%8B%D0%B9_%D0%B4%D0%BE%D0%BC&#34;&gt;&amp;#171;Умный дом&amp;#187;&lt;/a&gt; своими руками с системой sms информирования владельца в случае нарушения периметра или срабатывания различных сенсоров.&lt;/p&gt;
+
+&lt;p&gt;Идея собрать и реализовать данную систему принадлежит моему отцу, за ним же и вся часть связанная с паяльником =) Я же, являюсь автором этой статьи и заказанного отцом кода, так как он пока не очень быстро научился писать программы для ардуинчика.&lt;/p&gt;
+
+&lt;p&gt;Ядром нашей системы будет выступать плата ввода-вывода &lt;a href=&#34;http://arduino.cc/en/Main/Products&#34; title=&#34;Arduino Products&#34;&gt;Arduino&lt;/a&gt; (в нашем случае &lt;a href=&#34;http://arduino.cc/en/Main/ArduinoBoardLeonardo&#34;&gt;Arduino Leonardo&lt;/a&gt;), которая представляет из себя контроллер позволяющий достаточно легко обрабатывать цифровые и аналоговые сигналы и программировать логику в среде разработки на языке &lt;a href=&#34;http://ru.wikipedia.org/wiki/Processing&#34;&gt;Processing&lt;/a&gt;/Wiring (очень простой и понятный си подобный язык ).&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;a href=&#34;http://arduino.cc/en/Main/ArduinoBoardLeonardo&#34;&gt;&lt;img src=&#34;http://blog.odvinc.ru/post/img/ArduinoLeonardoFront_2_400px.jpg&#34; alt=&#34;Arduino Leonardo&#34; title=&#34;Arduino Leonardo&#34; /&gt;&lt;/a&gt;&lt;br /&gt;
+&lt;small&gt;Arduino Leonardo&lt;/small&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;Заказать Arduino можно, например на &lt;a href=&#34;http://aliexpress.com&#34;&gt;AliExpress&lt;/a&gt;. Стоимость за версию &lt;a href=&#34;http://arduino.cc/en/Main/ArduinoBoardLeonardo&#34; title=&#34;Leonardo&#34;&gt;Arduino Leonardo&lt;/a&gt; у хорошего продавца, в среднем составляет 10$.&lt;/p&gt;
+
+&lt;p&gt;Для управления системой и смс информированием можно использовать практически любой GSM модем имеющий возможность обработки AT команд через последовательный порт. В качестве эталонного варианта предлагаю использовать &lt;a href=&#34;http://arduino.cc/en/Main/ArduinoGSMShield&#34;&gt;Arduino GSM Shield&lt;/a&gt;. Мы же использовали имеющийся в наличии старенький Siemens MC35i Terminal.&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;img src=&#34;http://blog.odvinc.ru/post/img/Siemens-MC35i-Terminal.jpg&#34; alt=&#34;Siemens MC35i Terminal&#34; title=&#34;Siemens MC35i Terminal&#34; /&gt;&lt;br /&gt;
+&lt;small&gt;Siemens MC35i Terminal&lt;/small&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;Схему подключения пришлось немного доработать, так как потребовалось согласовать уровни. Для этого была использована микросхема &lt;a href=&#34;http://ru.wikipedia.org/wiki/MAX232&#34;&gt;MAX232&lt;/a&gt;. Микросхему установили навесным монтажом, непосредственно внутри модема. Схема подключения аналогична &lt;a title=&#34;Схема подключения MAX232&#34; href=&#34;http://www.robolive.ru/circuit/max232.php&#34; target=&#34;_blank&#34;&gt;этой&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Исходный код, достаточно подробно документирован, фактически комментарий есть к каждой строке, чтобы  логика программы была понятна человеку не сильно сведущему в программировании, и в случае необходимости, каждый смог бы переделать программу под свои нужды.&lt;/p&gt;
+
+&lt;p&gt;Ссылка на исходный код доступна на &lt;a title=&#34;Smart House&#34; href=&#34;https://github.com/odvinc/smart_house&#34; target=&#34;_blank&#34;&gt;GitHub&lt;/a&gt;. Там же можно найти несколько вариаций, в которых кнопка постановки на охрану и сенсоры логически инвертированы с 0 на 1. Одним из вариантов является SoftwareSerial - может пригодиться, тем кто будет использовать Arduino с одним последовательным портом и кто захочет переопределить контакты RX,TX на условно произвольные. Для выбора вариантов нужно нажимать на кнопочку branch, как показано на скриншете:&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;&lt;img src=&#34;http://blog.odvinc.ru/post/img/select_branch.png&#34; alt=&#34;Select GitHub Branch&#34; title=&#34;Select GitHub Branch&#34; /&gt;&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;Основной вариант программы с использованием модема на порту COM1 (в коде Serial1) находится в branch: &lt;strong&gt;master&lt;/strong&gt;. Загрузить скетч (так принято называть программы для arduino) целиком, можно нажав кнопку &lt;strong&gt;&amp;#171;Download ZIP&amp;#187;&lt;/strong&gt;, в правом нижнем углу.&lt;/p&gt;
+
+&lt;p&gt;В файлике &lt;a href=&#34;https://github.com/odvinc/smart_house/blob/master/at_sms.txt&#34; title=&#34;at_sms.txt&#34;&gt;at_sms.txt&lt;/a&gt; представлен типовой диалог инициализации модема и получения смс сообщения с текстом &amp;#171;STATUS&amp;#187;, к которому мы подключены терминалом через последовательный порт.&lt;/p&gt;
+
+&lt;p&gt;В файле &lt;a href=&#34;https://github.com/odvinc/smart_house/blob/master/smart_house.ino&#34; title=&#34;smart_house.ino&#34;&gt;smart_house.ino&lt;/a&gt; находится непосредственно скетч.&lt;/p&gt;
+
+&lt;p&gt;Тем кому лень, детально изучать код программы и вникать в тонкости - расскажу, как примерно работает логика программы и как можно адаптировать ее под себя.&lt;/p&gt;
+
+&lt;p&gt;Прежде всего, хочу обратить внимание, что из фиксированного функционала в программу заложена только защита периметра. Для этого на определенный пин (в нашем примере это 12 pin) заведена секретная кнопка. После запуска arduino система ожидает ее нажатия, для инициализации постановки на охрану. В случае если инициализация произойдет, то она ожидает разрыв и замыкание периметра (открытие и закрытие двери), о чем сообщает кратковременными звуковыми сигналами с динамика (в нашем примере динамик расположен на 5 пине, а периметр отожествлен с пином номер 8). Как только произойдет закрытие двери, система встанет на охрану и будет ожидать, когда произойдет событие размыкание контура. После того как мы вернулись домой, и открыли дверь, система нам предоставит 10 секунд (параметр в функции &lt;code&gt;checkIFF(10)&lt;/code&gt;) на нажатие  секретной кнопки. Если же мы этого не делаем или не успеваем в отведенное нам время, система отправляет смс сообщение на номер(а) хозяина, и переходит в режим аварийного звукового оповещения. Снять аварийный режим можно длительным 4х секундным нажатием на секретную кнопку.&lt;/p&gt;
+
+&lt;p&gt;В случае если срабатывают сенсоры, также приходит смс уведомление с информацией какой сенсор сработал и что произошло.&lt;/p&gt;
+
+&lt;p&gt;Большинство настроек, таких как номера пинов,  массивы для датчиков и устройств доступны в начале кода программы.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;// постоянные
+const int buttonPin = 12; // пин для кнопки
+const int perimeterPin = 8; // пин для периметра
+const int ledPin = 10 ; // пин индикатора
+const int sysledPin = 13; // пин системного индикатора
+const int tonePin = 5; // пин для динамика
+...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Номера телефонов на которые будут отправляться смс уведомления задаются в массив  &lt;code&gt;smsNumbers[]&lt;/code&gt; через запятую, по формату.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;char* smsNumbers[] = {&amp;quot;+79110000000&amp;quot;, &amp;quot;+79630000000&amp;quot;}; // номера на которые необходимо отсылать аварийные сообщения
+...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Если оставить массив пустым &lt;code&gt;smsNumbers[] = {};&lt;/code&gt; то сообщения отправляться не будут, останутся только звуковое оповещения.&lt;/p&gt;
+
+&lt;p&gt;Аналогичным способом можно определить имеющиеся у вас сенсоры и устройства. Ниже пример определения двух сенсоров, - датчика протечки воды и утечки газа, где по порядку  определены: пин на котором находится сенсор, состояние сенсора и состояние аварии на момент инициализации arduino, название сенсора для смс уведомления, а также аварийное сообщение и сообщение по его локализации.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;// объявление сенсоров и их кодов ошибок
+tSensor mySensors[] = {
+    { 6, false, false, &amp;quot;Water&amp;quot;, &amp;quot;WARNING! Found water leakage.&amp;quot;, &amp;quot;Water leakage disappeared.&amp;quot; },
+    { 3, false, false, &amp;quot;Gas&amp;quot;, &amp;quot;WARNING! Found gas leakage.&amp;quot;, &amp;quot;Gas leakage disappeared.&amp;quot; }
+};
+...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Также в программу заложена логика управления устройствами. В данном случае под устройствами понимается некий пин назначенный вами, к которому вы можете подключить реле или просто устанавливать логический ноль или единицу отправив команду по смс.&lt;/p&gt;
+
+&lt;p&gt;Устройства определяются точно таким же образом, как и сенсоры за небольшим исключением в формате записи массива.&lt;/p&gt;
+
+&lt;p&gt;Формат записи устройств: &lt;em&gt;[пин, состояние устройства на момент запуска, сенсорная кнопка или нет, название устройства для смс информирования]&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Пример:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;// объявление устройств и их состояний
+tDevice myDevices[] = {
+    { 7, false, true, &amp;quot;Unit 1&amp;quot;},
+    { 2, false, false, &amp;quot;Unit 2&amp;quot;}
+};
+...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Третье по порядку значение, определяет тип кнопки устройства. Кнопка может быть &amp;#171;сенсорной&amp;#187;, т.е. при подаче команды на нее подается логическая 1 и 0 с интервалом в 1 сек, либо фиксированная, где - 1 всегда вкл,  а 0 выкл.&lt;/p&gt;
+
+&lt;p&gt;Управлять устройствами можно отправив sms сообщение следующего формата, на номер к которому подключена система:&lt;/p&gt;
+
+&lt;p&gt;[секретный код][0 или 1]&amp;hellip;[0 или 1], где секретный код, это код заданный в начале программы, а 0 и 1 символизируют выключенное и включенное состояние соответственно:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;String secretStr = &amp;quot;7770:&amp;quot;; // кодовое слово для подачи команд по смс
+...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;т.е. например, чтобы включить первое устройство и выключить второе необходимо отправить смс сообщение следующего содержания &amp;#171;&lt;strong&gt;7770:10&lt;/strong&gt;&amp;#187; . Количество параметров в смс, должно соответствовать количеству устройств в системе, в противном случае сообщение будет проигнорировано.&lt;/p&gt;
+
+&lt;p&gt;Если на номер системы отправить смс сообщение со словом &amp;#171;&lt;strong&gt;STATUS&lt;/strong&gt;&amp;#187;, то в ответ вы получите примерно такое сообщение:&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;&lt;img src=&#34;http://blog.odvinc.ru/post/img/status_msg.png&#34; alt=&#34;STATUS Message&#34; title=&#34;STATUS Message&#34; /&gt;&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;Можно пойти дальше и написать приложение, например для Android, но мы решили не заморачиваться =)&lt;/p&gt;
+
+&lt;p&gt;Вся отладочная информация дублируется на последовательный по умолчанию порт Serial. Этот же порт при желании можно задействовать для gsm модема, закомментировав  отладочный вывод.&lt;/p&gt;
+
+&lt;p&gt;P.S. При монтаже системы столкнулись с проблемой ложных срабатываний из-за достаточно большой длинны периметра. Как оказалось, бороться с этим достаточно просто установив несколько керамических конденсаторов по 5 вольтам Arduino.&lt;/p&gt;
+
+&lt;p&gt;Скачать среду разработки &lt;a href=&#34;http://arduino.cc/en/Main/Software&#34;&gt;Arduino IDE&lt;/a&gt; для вашей ОС можно по ссылке с официального сайта.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
