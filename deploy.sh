@@ -2,8 +2,21 @@
 
 echo -e "\033[0;32mDeploying updates to GitHub...\033[0m"
 
+# Remove the public folder to make room for the gh-pages subtree
+rm -rf public
+
 # Build the project.
-hugo
+#hugo
+cat > public/index.html <<EOF
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="refresh" content="0; url=http://odvinc.ru/">
+</head>
+<body>
+</body>
+</html>
+EOF
 
 # Add changes to git.
 git add -A
