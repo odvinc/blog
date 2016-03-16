@@ -7,6 +7,9 @@ rm -rf public
 
 # Build the project.
 #hugo
+
+# Redirect to http://odvinc.ru
+mkdir /public
 cat > public/index.html <<EOF
 <!DOCTYPE html>
 <html>
